@@ -1,0 +1,65 @@
+doctype
+html(lang='en')
+    head
+        include Includes/header
+        include Includes/mixins
+        script(src="/JS/tictactoe.js", defer)
+    body
+        #loader-wrapper
+            #loader
+            .loader-section.section-left
+            .loader-section.section-right
+        include Includes/navbar
+        .jumbotron.text-center.bg-transparent
+            img.img-fluid(src='/Images/index.png', size=64)
+            h1.display-3 Tic Tac Toe
+            .container
+                .row
+                    .col#col
+                        p Select game mode
+                        select#gameModeSelection.form-select
+                            option(id="defaultSelection", selected disabled) Select a game mode 
+                            option(value="player") Player vs. Player
+                            option(value="bot") Player vs. Bot
+                        p#gameModus.invisible 
+                            button.btn.btn-success#easy Easy 
+                            button.btn.btn-danger#hard Hard
+                        p Actions 
+                        .btn-group(role="group")
+                            button.btn.btn-danger(id="resetField") Reset field
+            p#info.lead
+            div.jumbotron.text-center.bg-transparent
+                p#result
+                div#gameboard.game-board
+                    button(data-column=0, data-row=0)#A1.box
+                    button(data-column=1, data-row=0)#A2.box
+                    button(data-column=2, data-row=0)#A3.box
+                    button(data-column=0, data-row=1)#B1.box
+                    button(data-column=1, data-row=1)#B2.box
+                    button(data-column=2, data-row=1)#B3.box
+                    button(data-column=0, data-row=2)#C1.box
+                    button(data-column=1, data-row=2)#C2.box
+                    button(data-column=2, data-row=2)#C3.box        
+        include Includes/footer
+style.
+    .game-board {
+        width: 600px;
+        height: 600px;
+        margin: 0 auto;
+        background-color: #34495e;
+        color: #fff;
+        border: 6px solid #2c3e50;
+        border-radius: 10px;
+        display: grid;
+        grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    }
+    .box {
+        border: 6px solid #2c3e50;
+        border-radius: 2px;
+        font-family: Helvetica;
+        font-weight: bold;
+        font-size: 4em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }

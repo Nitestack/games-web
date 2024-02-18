@@ -1,0 +1,11 @@
+nav.navbar.navbar-expand-xl.navbar-dark.bg-dark
+    .container-fluid 
+        a.navbar-brand(href='/') 
+            img.img-fluid(src='/Images/index.png', width=50, height=50)
+            | NightClash
+        #navbar.collapse.navbar-collapse
+            ul.navbar-nav
+                li.nav-item.dropdown.position-relative.top-10
+                    a.nav-link(type="button", id="navbarTicTacToe", href='/tictactoe') #[i.fas.fa-code] Tic Tac Toe
+                li.nav-item.dropdown.position-relative.top-10
+                    a.nav-link(type="button", id="navbarTicTacToe", href='/connect4') #[i.fas.fa-code] Connect 4

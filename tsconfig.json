@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@root/*": ["*"],
+      "@routes/*": ["Routes/*"],
+      "@dist/*": ["Dist/*"],
+      "@api/*": ["API/*"]
+    },
+    "lib": ["ESNext", "DOM"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "resolveJsonModule": true,
+    "outDir": "src/Dist/JS"
+  },
+  "include": ["src/TS"],
+  "exclude": ["node_modules"]
+}

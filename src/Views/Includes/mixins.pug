@@ -1,0 +1,173 @@
+mixin createSlider(name, min, max, photoPath)
+    .slideGroup(id=name + "slideGroup")
+        .container 
+            .row
+                .col-3
+                    if height
+                        img.slider-image(id="photo" + name, src=photoPath)
+                    else 
+                        img.slider-image(id="photo" + name, src=photoPath)
+                .col-6
+                    input.slider(type="range", min=min, max=max, id=name, name=name, value=min)
+                .col-3
+                    input.form-control(type="number", min=min, max=max, id="number" + name, value=min)
+
+mixin createGlobalSlider(name, max)
+    .input-group.mb-3
+        span.input-group-text Set all Lvl. 
+        input.form-control(id="global" + name, type="number", min=0, max=max)
+
+mixin createMultipleSlidersHome(name, photoPath, townHall)
+    if townHall[name[0].toLowerCase() + name.slice(1).replace(/ /g, "").replace(/-/g, "_")]
+        p.lead #{name}
+        +createGlobalSlider(name.replace(/ /g, "").replace(/-/g, ""), townHall[name[0].toLowerCase() + name.slice(1).replace(/ /g, "").replace(/-/g, "_")].maxLevel)
+        - let i = 1;
+        each _ in Array(townHall[name[0].toLowerCase() + name.slice(1).replace(/ /g, "").replace(/-/g, "_")].amount)
+            +createSlider(name.replace(/ /g, "").replace(/-/g, "") + i++, 0, townHall[name[0].toLowerCase() + name.slice(1).replace(/ /g, "").replace(/-/g, "_")].maxLevel, photoPath)
+
+mixin createMultipleSlidersBuilder(name, photoPath, builderHall, builderHallLevel)
+    if builderHall[name[0].toLowerCase() + name.slice(1).replace(/ /g, "").replace(/-/g, "_")]
+        p.lead #{name}
+        +createGlobalSlider(name.replace(/ /g, "").replace(/-/g, ""), builderHallLevel)
+        - let i = 1;
+        each _ in Array(builderHall[name[0].toLowerCase() + name.slice(1).replace(/ /g, "").replace(/-/g, "_")])
+            +createSlider(name.replace(/ /g, "").replace(/-/g, "") + i++, 0, builderHallLevel, photoPath)
+
+mixin profile(player, village) 
+    .row
+        .col(style="background-color: #8892AB; border-radius: 7px; border: 4px solid #697697;")
+            p.lead(align="center")
+                if player.expLevel < 10
+                    .xp.one #{player.expLevel}
+                else if player.expLevel >= 10 && player.expLevel < 100
+                    .xp.two #{player.expLevel}
+                else 
+                    .xp.three #{player.expLevel}
+                span.lead(style="color: white;")  #{player.name}
+                    span.mute(style="color: #6A6D8C;") #{player.tag} 
+                    button.btn.bg-transparent(type="button", id="shareButton", value=player.tag) #[i.fas.fa-share]
+            if player.labels 
+                for label of player.labels 
+                    img(src=label.iconUrls.small)
+        .col(style="background-color: #8892AB; border-radius: 7px; border: 4px solid #697697;")
+            if village == "home"
+                if player.league
+                    p.lead 
+                        img(src=player.league.iconUrls.medium, heigth=64, width=64)
+                        span.lead(align="center") #{player.league.name}
+                        span.lead 🏆#{player.trophies}
+                else 
+                    p.lead 
+                        img(src="/Images/Home/no-league.png", heigth=64, width=64)
+                        span.lead(align="center") Unranked
+                        span.lead 🏆#{player.trophies}
+                .row 
+                    .col(style="background-color: #38385C; border-radius: 7px; border: 4px solid #555D7F;")
+                        p.lead All time best: 
+                        p.lead 🏆#{player.bestTrophies}
+                    .col(style="background-color: #38385C; border-radius: 7px; border: 4px solid #555D7F;")
+                        p.lead War Stars Won: 
+                        p.lead ⭐#{player.warStars}
+            else if village == "builder"
+                p.lead 
+                    img(src="/Images/Builder/Builder League.png", height=64, width=64)
+                    span.lead 🏆#{player.versusTrophies}
+                .row 
+                    .col(style="background-color: #38385C; border-radius: 7px; border: 4px solid #555D7F;")
+                        p.lead All time best: 
+                        p.lead 🏆#{player.bestVersusTrophies}
+    .row
+        .col(style="background-color: #8892AB; border-radius: 7px; border: 4px solid #697697;")
+            if village == "home"
+                if player.townHallLevel < 12
+                    img.center(src="/Images/Home/Town Hall/" + player.townHallLevel + ".png", heigth=128, width=128)
+                    p.lead(style="color: white;", align="center") Level #{player.townHallLevel}
+                else 
+                    if player.townHallLevel == 12
+                        img.center(src="/Images/Home/Town Hall/Giga Tesla/" + player.townHallWeaponLevel + ".png", heigth=128, width=128)
+                        p.lead(style="color: white;", align="center") Level #{player.townHallLevel} ⭐#{player.townHallWeaponLevel}
+                    else if player.townHallLevel == 13
+                        img.center(src="/Images/Home/Town Hall/Giga Inferno 1/" + player.townHallWeaponLevel + ".png", heigth=128, width=128)
+                        p.lead(style="color: white;", align="center") Level #{player.townHallLevel} ⭐#{player.townHallWeaponLevel}
+                    else if player.townHallLevel == 14
+                        img.center(src="/Images/Home/Town Hall/Giga Inferno 2/" + player.townHallWeaponLevel + ".png", heigth=128, width=128)
+                        p.lead(style="color: white;", align="center") Level #{player.townHallLevel} ⭐#{player.townHallWeaponLevel}
+            else if village == "builder"
+                img.center(src="/Images/Builder/Builder Hall/" + player.builderHallLevel + ".png")
+                p.lead(style="color: white;", align="center") Level #{player.builderHallLevel}
+        .col(style="background-color: #8892AB; border-radius: 7px; border: 4px solid #697697;")
+            if player.clan
+                img.center(src=player.clan.badgeUrls.medium)
+                p.lead(align="center")
+                    span.lead(style="color: white;")  #{player.clan.name}
+                        span.mute(style="color: #6A6D8C;") #{player.clan.tag}
+                    p.lead(style="color: white;", align="center") #{player.role.replace(/coLeader/g, "Co-leader").replace(/leader/g, "Leader").replace(/admin/g, "Elder").replace(/member/g, "Member")}
+            else 
+                img.center(src="/Images/Home/no-clan.png")
+                p.lead(align="center")
+                    span.lead(style="color: white;") No Clan
+    .row.mb-3
+        if village == "home" 
+            .col(style="background-color: #4D4C78; border-radius: 7px; border: 4px solid #7763A0;")
+                p.lead Troops donated: 
+                    code.lead #{player.donations}
+            .col(style="background-color: #4D4C78; border-radius: 7px; border: 4px solid #7763A0;")
+                p.lead Troops received: 
+                    code.lead #{player.donationsReceived}
+            if player.league
+                .col(style="background-color: #4D4C78; border-radius: 7px; border: 4px solid #7763A0;") 
+                    p.lead Attacks Won: 
+                        code.lead #{player.attackWins}
+                .col(style="background-color: #4D4C78; border-radius: 7px; border: 4px solid #7763A0;")
+                    p.lead Defenses Won: 
+                        code.lead #{player.defenseWins}
+        else if village == "builder"
+            .col(style="background-color: #4E4C78; border-radius: 7px; border: 4px solid #1F1F32;", align="right")
+                p.lead Versus Battle Wins: 
+                    code.lead #{player.versusBattleWins}
+    script(src="/JS/Upgrade/profile.js", defer)
+
+mixin createTableContent(name, photoPath, townHall, element, levels)
+    - let i = 0;
+    - let level = min(levels);
+    - function min(input) { if (toString.call(input) !== "[object Array]") return false; return Math.min.apply(null, input); };
+    tr 
+        td.align-middle(rowspan=townHall[name[0].toLowerCase() + name.slice(1).replace(/ /g, "").replace(/-/g, "_")].amount + 1, style="width: 130px;")
+            .center-image
+                img(src=photoPath + townHall[name[0].toLowerCase() + name.slice(1).replace(/ /g, "").replace(/-/g, "_")].maxLevel + ".png", style="height: 40px;")
+            p.lead(align="center") #{name}
+    each level in levels
+        tr
+            td.align-middle
+                .container 
+                    .row
+                        .col-1
+                            .center-image
+                                img(src=photoPath + level + ".png", style="height: 30px;")
+                        .col-2(style="text-align: center;")
+                            | #{level}/#{townHall[name[0].toLowerCase() + name.slice(1).replace(/ /g, "").replace(/-/g, "_")].maxLevel}
+                        .col-1(style="text-align: center;")
+                            if level == townHall[name[0].toLowerCase() + name.slice(1).replace(/ /g, "").replace(/-/g, "_")].maxLevel
+                                i.fas.fa-check(style="color: green;")
+                            else
+                                button.btn.btn-success ↑
+    each _ in Array(townHall[name[0].toLowerCase() + name.slice(1).replace(/ /g, "").replace(/-/g, "_")].maxLevel - level)
+        tr
+            td.align-middle
+                .container 
+                    .row
+                        .col
+                            p Lvl. #{level + i + 1} 
+                        .col
+                            p(style=element.levels[level + i].costType.includes("gold") ? "color: yellow;" : "color: #AA31CD;") #{element.levels[level + i].convertedPrice}
+                                if element.levels[level + i].costType == "gold"
+                                    img(src="/Images/Home/Gold.png", style="max-width: 20px;")
+                                else if element.levels[level + i].costType == "elixir"
+                                    img(src="/Images/Home/Elixir.png", style="max-width: 20px;")
+                                else if element.levels[level + i].costType == "builderGold"
+                                    img(src="/Images/Home/Builder Gold.png", style="max-width: 20px;")
+                                else if element.levels[level + i].costType == "builderElixir"
+                                    img(src="/Images/Home/Builder Elixir.png", style="max-width: 20px;")
+                                else if element.levels[level + i].costType == "builderGoldAndElixir" || element.levels[level + i].costType == "goldAndElixir"
+                                    img(src="/Images/Home/Gold and Elixir.png", style="max-width: 20px;")
+            - i++;

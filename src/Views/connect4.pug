@@ -1,0 +1,166 @@
+doctype
+html(lang='en')
+    head
+        include Includes/header
+        include Includes/mixins
+        script(src="/JS/connect4.js", defer)
+    body
+        #loader-wrapper
+            #loader
+            .loader-section.section-left
+            .loader-section.section-right
+        include Includes/navbar
+        .jumbotron.text-center.bg-transparent
+            img.img-fluid(src='/Images/index.png', size=64)
+            h1.display-3 Connect 4
+            .container
+                .row
+                    .col#col
+                        p Select game mode
+                        select#gameModeSelection.form-select
+                            option(id="defaultSelection", selected disabled) Select a game mode 
+                            option(value="player") Player vs. Player
+                            option(value="bot") Player vs. Bot
+                        p#gameModus.invisible 
+                            button.btn.btn-success#easy Easy 
+                            button.btn.btn-danger#hard Hard
+                        p Actions 
+                        .btn-group(role="group")
+                            button.btn.btn-danger(id="resetField") Reset field
+            p#info.lead
+            div.jumbotron.text-center.bg-transparent
+                p#result
+                #game-board
+                    #column-0.column(data-x='0')
+                        svg(height='100', width='100')
+                            circle.hover(type="button", cx='50', cy='50', r='40')
+                        svg.row-5(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-4(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-3(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-2(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-1(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-0(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                    #column-1.column(data-x='1')
+                        svg(height='100', width='100')
+                            circle.hover(type="button", cx='50', cy='50', r='40')
+                        svg.row-5(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-4(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-3(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-2(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-1(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-0(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                    #column-2.column(data-x='2')
+                        svg(height='100', width='100')
+                            circle.hover(type="button", cx='50', cy='50', r='40')
+                        svg.row-5(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-4(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-3(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-2(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-1(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-0(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                    #column-3.column(data-x='3')
+                        svg(height='100', width='100')
+                            circle.hover(type="button", cx='50', cy='50', r='40')
+                        svg.row-5(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-4(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-3(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-2(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-1(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-0(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                    #column-4.column(data-x='4')
+                        svg(height='100', width='100')
+                            circle.hover(type="button", cx='50', cy='50', r='40')
+                        svg.row-5(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-4(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-3(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-2(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-1(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-0(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                    #column-5.column(data-x='5')
+                        svg(height='100', width='100')
+                            circle.hover(type="button", cx='50', cy='50', r='40')
+                        svg.row-5(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-4(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-3(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-2(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-1(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-0(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                    #column-6.column(data-x='6')
+                        svg(height='100', width='100')
+                            circle.hover(type="button", cx='50', cy='50', r='40')
+                        svg.row-5(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-4(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-3(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-2(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-1(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')
+                        svg.row-0(height='100', width='100')
+                            circle.free(type="button", cx='50', cy='50', r='40', stroke='#0B4E72', stroke-width='3')  
+        include Includes/footer
+style.
+    #gameboard {
+        background: #0074B3;
+        width: 730px;
+        cursor: pointer;
+    }
+
+    .column {
+        width: 100px;
+        display: inline-block;
+    }
+
+    .column:hover circle.free {
+        fill: #D5E4ED;
+    }
+
+    circle.free {
+        fill: #fff;
+    }
+
+    circle.red {
+        fill: #D50000;
+    }
+
+    circle.yellow {
+        fill: #DAD400;
+    }
